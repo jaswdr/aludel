@@ -55,8 +55,9 @@ doc/
 # Database
 *.db
 
-# Test files
-test/
+# Test files (keep support/ for dev migrations and repo)
+test/aludel/
+test/aludel_web/
 
 # Development files
 .formatter.exs

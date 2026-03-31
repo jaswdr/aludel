@@ -1,0 +1,29 @@
+services:
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: aludel_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/app
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@db:5432/aludel_dev
+      MIX_ENV: dev
+      PORT: "4000"
+    depends_on:
+      - db
+
+volumes:
+  pgdata:
